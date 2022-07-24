@@ -4,35 +4,34 @@
 //
 //  Created by Atlas on 2022/07/21.
 //
+//
+//  main.swift
+//  B7795
+//
+//  Created by Atlas on 2022/07/21.
+//
 
 import Foundation
 
-func solution(testCase: Int){
-    for _ in 0..<testCase {
-        let arraySize = readLine()?.split(separator: " ").compactMap{Int($0)}
-        guard let arraySize = arraySize else { return }
-    
-        var array = [[Int]]()
-        for _ in 0..<arraySize.count {
-            let temp2 = readLine()?.split(separator: " ").compactMap{Int($0)}
-            array.append((temp2!.sorted()))
-        }
-        
-        getResult(array)
-    }
-}
-
-func getResult(_ data: [[Int]]) {
+func getResult(leftArray: [Int], rightArray: [Int]) {
     var count = 0
     
-    data[0].forEach { str in
-        let value = Int(str)
-        data[1].forEach { str2 in
-            let value2 = Int(str2)
-            if value > value2 {
-                count += 1
+    leftArray.forEach { leftValue in
+        var left = 0
+        var right = rightArray.count - 1
+        
+        while left <= right {
+            let mid = (left + right) / 2
+            print("v :\(leftValue) , left: \(left) ,right :\(right), mid\(mid) , midvalue \(rightArray[mid])")
+            if leftValue > rightArray[mid] {
+                left = mid + 1
+            }else{
+                right = mid-1
             }
         }
+        
+        print("count ===== > \(left)")
+        count += left
     }
     
     print("\(count)" )
@@ -40,5 +39,10 @@ func getResult(_ data: [[Int]]) {
 
 
 let testCaseLength = readLine()!
-print("\(solution(testCase: (Int(testCaseLength) ?? 0)))")
 
+for _ in 0..<Int(testCaseLength)! {
+    let _ = readLine()?.split(separator: " ").compactMap{Int($0)}
+    let leftArray = readLine()?.split(separator: " ").compactMap{Int($0)}.sorted()
+    let rightArray = readLine()?.split(separator: " ").compactMap{Int($0)}.sorted()
+    getResult(leftArray: leftArray!, rightArray: rightArray!)
+}
