@@ -1,0 +1,16 @@
+func icecreamParlor(m: Int, arr: [Int]) -> [Int] {
+    // Write your code here
+    var res = [Int]()
+    outer:for i in 0..<arr.count {
+        for j in i+1..<arr.count {
+            if arr[i] + arr[j] == m {
+                res = [i+1,j+1]
+                break outer
+            }
+        }
+    }
+    return res
+} 
+
+
+구현 부분만 기재합니다.
